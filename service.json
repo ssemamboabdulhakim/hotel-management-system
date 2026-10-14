@@ -1,14 +1,1 @@
-[
-    {
-        "service_id": "s001",
-        "service_name": "breakfast",
-        "service_type": "vip",
-        "status": "available"
-    },
-    {
-        "service_id": "s002",
-        "service_name": "lunch",
-        "service_type": "vvip",
-        "status": "available"
-    }
-]
+{}

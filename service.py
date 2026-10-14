@@ -1,8 +1,6 @@
 from main import Service
 import json
 
-services =  []
-
 while True:
     #get user inputs
     service_id = input("Enter service_id: ")

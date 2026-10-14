@@ -1,8 +1,5 @@
 from main import Reservation
-
-
 import json
-
 
 while True:
     room_id = input("enter room_id:").upper()

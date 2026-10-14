@@ -1,18 +1,1 @@
-[
-    
-    {
-        "room_id": "r01",
-        "room_no": "t001",
-        "price_per_nyt": 0,
-        "full_day_price": 0,
-        "status": "booked"
-    },
-    {
-        "room_id": "r02",
-        "room_no": "t002",
-        "price_per_nyt":0,
-        "full_day_price": 0,
-        "status": "available"
-        
-    }
-]
+{}

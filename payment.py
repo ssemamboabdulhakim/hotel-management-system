@@ -1,6 +1,4 @@
 from main import Payment
-
-from datetime import datetime
 import json
 
 

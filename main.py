@@ -1,10 +1,10 @@
 class Room:
-    def __init__(self,room_no,room_id,status):
+    def __init__(self,room_no,room_id):
         self.room_id= room_id
         self.room_no= room_no
         self.__price_per_nyt = self.calculate_cost()
         self.__full_day_price = self.compute_fullday_price()
-        self.status =  self.book_room()
+        self.status = None
     
     def __str__(self):
         return f'YOUR ROOM ID:{self.room_id} \n YOUR ROOM NO:{self.room_no} \n YOUR STATUS:{self.status}'    
@@ -195,27 +195,6 @@ class Client:
     def __str__(self):
         return f'{self.first_name} {self.last_name}\n{self.client_id}\n{self.contact} {self.__nationality}' 
     
-    
-    
-
-class Payment:
-    def __init__(self,client,staff):
-        self.payment_id = self.set_payment_method()
-        self.client = client
-        self.__payment_method = self.get_payment_method()
-        self.__staff = staff
-
-    
-    def set_payment_method(self):
-        return self.__payment_method
-
-    def get_payment_method(self):
-        return self.__payment_method
-    
-    
-    
-    
-
 class Guestservice:
     def __init__(self,service_id,client_service_id,staff,client_id):
         self.service_id= service_id
@@ -248,7 +227,23 @@ class Guestservice:
     def get_no_of_services(self):
         return self.no_of_services
     
-            
 
-        
+class Payment:
+    def __init__(self,payment_id,client,payment_method,staff,):
+        self.payment_id = payment_id
+        self.client = client
+        self.payment_method = payment_method
+        self.__bill = self.compute_bill
+        self.staff = staff
+
+    
+    def compute_bill(self):
+        return self.__bill
+
+    def get_payment_method(self):
+        return self.__payment_method
+    
+    
+    
+    
 
