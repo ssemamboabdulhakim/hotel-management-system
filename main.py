@@ -1,30 +1,31 @@
 class Room:
-    def __init__(self,room_no,room_id,status,price_per_nyt,full_day_price):
+    def __init__(self,room_no,room_id,status):
         self.room_id= room_id
         self.room_no= room_no
-        self.__price_per_nyt = price_per_nyt
-        self.__full_day_price = full_day_price
-        self.status = status    
+        self.__price_per_nyt = self.calculate_cost()
+        self.__full_day_price = self.compute_fullday_price()
+        self.status =  self.book_room()
     
     def __str__(self):
         return f'YOUR ROOM ID:{self.room_id} \n YOUR ROOM NO:{self.room_no} \n YOUR STATUS:{self.status}'    
 
-    
-    def  get_price_pernight(self):
-        return self.__price_per_nyt
 
     def  set_price_pernight (self,value):
         if value < 0:
             raise ValueError('price cannot be negative')
         self.__price_per_nyt = value
 
-    def get_full_day_price(self):
-        return self.__full_day_price
+    def  get_price_pernight(self):
+        return self.__price_per_nyt    
+
     
     def set_price_pernight (self,value):
         if value < 0:
             raise ValueError('price cannot be negative')
         self.__full_day_price = value 
+
+    def get_full_day_price(self):
+        return self.__full_day_price    
 
     def availability(self):
         return self.status == "available"
@@ -58,8 +59,8 @@ class Roomtype:
     def __init__(self,room_type_id,room_type_no):
         self.room_type_id= room_type_id
         self.room_type_no= room_type_no
-        self.__category = None
-        self.__capacity = None
+        self.__category = self.set_categoryroom()
+        self.__capacity = self.get_capacity()
 
     def __str__(self):
         return f'YOUR CAT IS:{self.__category} \n YOUR CAPACITY IS:{self.__capacity} '
@@ -77,17 +78,8 @@ class Roomtype:
         self.__category = category
 
     def get_capacity (self):
+        self. __capacity += 1
         return self.__capacity
-
-    #how many rooms of this type are needed  
-    def room_needed(self,guests):
-        if guests <= 0:
-            raise ValueError ('guests must be greater than 0')
-        elif not self.__capacity:
-            raise ValueError ('category and capacity must be set first')
-
-    
-
 
 class Service:
 
@@ -101,12 +93,12 @@ class Service:
 
     STATUSES = ("available", "not_available")
 
-    def __init__(self,service_id,service_name,status):
+    def __init__(self,service_id,service_name):
         self.service_id= service_id
         self.service_name= service_name
-        self.__service_description= Service.STATUSES
-        self.__unit_cost = Service.MENU 
-        self.status= status 
+        self.__service_description= Service.MENU 
+        self.__unit_cost = self.compute_unit_cost()
+        self.status= self.get_status ()
 
     def __str__ (self):
         return f'SERVICE ID:{self.service_id}\nSERVICE NAME:{self.service_name} \nSERVICE STATUS:{self.status}'         
@@ -159,67 +151,58 @@ class Reservation:
         self.reservation_id = reservation_id
         self.room_id= room_id
         self.room_no= room_no
-        self.__check_in_date= "12/10/2026"
-        self.__check_out_date= "13/10/2026"
-        self.__check_in_time= "12:00"
-        self.__check_out_time= "15:00" 
+        self.check_in_date= self.set_check_in_date()
+        self.check_out_date= self.set_check_out_date()
+        self.check_in_time= self.set_check_in_time()
+        self.check_out_time= self.set_check_out_time()
 
     def __str__(self):
         return f'RESERVATION ID:{self.reservation_id} \nCHECK IN DATE:{self.check_in_date} \nCHECK OUT TIME:{self.check_out_time} '    
-        
-    def reservation_id(self):
-        return self.reservation_id
 
-    def check_in_date(self):
-        return self.__check_in_date
-    def set_check_in_date(self, value):
-        self.__check_in_date = value
+    def set_check_in_date(self):
+        from datetime import datetime
+        self.check_in_date = datetime.today().time
+        return self.check_in_date
+    
+    def set_check_out_date(self):
+        from datetime import datetime 
+        self.check_out_date = datetime.today().date
+        return self.check_out_date
 
-    def check_out_date(self):
-        return self.__check_out_date
+    def set_check_in_time(self):
+        from datetime import datetime 
+        self.check_in_date = datetime.today().time
+        return self.check_in_time
 
-    def set_check_out_date(self,value):
-        self.__check_out_date = value
-
-    def check_in_time(self):
-        return self.__check_in_time
-
-    def set_check_in_time(self,value):
-        self.__check_in_time = value
-
-    def check_out_time(self):
+    def set_check_out_time(self):
+        from datetime import datetime 
+        self.check_out_time = datetime.today().time
         return self.__check_out_time
 
-    def set_check_out_time(self,value):
-        self.__check_out_time = value
     
     
 
 class Client:
-    def __init__(self,first_name,last_name,contact,gender,address):
-        self.first_name= first_name
-        self.last_name= last_name
-        self.__client_id= "c001"
-        self.contact= contact
+    def __init__(self,first_name,last_name,client_id,contact,gender,address,nationality):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.client_id = client_id
+        self.contact = contact
         self.gender = gender
         self.address = address
-        self.__nationality = "ugandan"
+        self.nationality = nationality
         
     def __str__(self):
-        return f'{self.first_name} {self.last_name}\n{self.client_id}\n{self.contact} {self.__nationality} '
-
-    def set_client_id(self):
-        return self.__client_id
+        return f'{self.first_name} {self.last_name}\n{self.client_id}\n{self.contact} {self.__nationality}' 
     
-    def get_nationality(self):
-        return self.__nationality
+    
     
 
 class Payment:
-    def __init__(self,payment_id,client,staff):
-        self.payment_id = payment_id
-        self.cleint = Client
-        self.__payment_method = "none"
+    def __init__(self,client,staff):
+        self.payment_id = self.set_payment_method()
+        self.client = client
+        self.__payment_method = self.get_payment_method()
         self.__staff = staff
 
     
@@ -228,51 +211,44 @@ class Payment:
 
     def get_payment_method(self):
         return self.__payment_method
-    def set_staff(self):
-        return self.__staff
-    def get_staff(self):
-        return self.__staff
     
     
-
-
-
-#adding a comment     
+    
+    
 
 class Guestservice:
-    def __init__(self,service_id,client_service_id,service_date,service_time,staff,guest_id):
-        self.__service_id= service_id
+    def __init__(self,service_id,client_service_id,staff,client_id):
+        self.service_id= service_id
         self.client_service_id= client_service_id
-        self.guest_id= guest_id
-        self.service_date= service_date
+        self.client_id= client_id
+        self.service_date= self.service_date()
         self.service_time= self.compute_service_time()
-        self.__status= None
-        self.__staff= staff
-        self.__no_of_services= 0
+        self.__status= self.set_status()
+        self.staff= staff
+        self.no_of_services= self.get_no_of_services()
 
     def __str__(self):
-        return f'{self.__service_id} \n{self.}'
+        return f'{self.service_id} \n{self.client_id} \n{self.staff}'
     
-    def guest_service_id(self):
-        return self.guest_service_id
-    def guest_id(self):
-        return self.guest_id
-    def service_date(self):
+    def set_service_date(self):
         from datetime import datetime 
-        self.service_time =  datetime
-
-
+        self.service_time =  datetime.today().date
         return self.service_date
+    
     def compute_service_time(self):
         from datetime import datetime 
         self.service_time = datetime.today().time
         return self.service_time
-    def status(self):
-        return self.status
+    def set_status(self):
+        return self.__status
+    
     def staff(self):
         return self.staff
-    def no_of_services(self):
+    
+    def get_no_of_services(self):
         return self.no_of_services
+    
+            
 
         
 
