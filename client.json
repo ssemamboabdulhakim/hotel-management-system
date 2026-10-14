@@ -1,0 +1,22 @@
+[
+    {
+        "first_name": "kasodde",
+        "last_name": "Rashad",
+        "id": "c433",
+        "contact": "09876548",
+        "gender": "m",
+        "address": "kawempe",
+        "nationality": "Ugandan",
+        "total_bill": 0
+    },
+    {
+        "first_name": "Jane",
+        "last_name": "Batty",
+        "id": "c345",
+        "contact": "098764567",
+        "gender": "m",
+        "address": "kampala",
+        "nationality": "sudanese",
+        "total_bill": 0
+    }
+]

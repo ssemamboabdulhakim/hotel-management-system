@@ -1,0 +1,12 @@
+[
+    {
+        "room_type_id": "rt001",
+        "room_type_name": "premium",
+        "capacity": 8
+    },
+    {
+        "room_type_id": "rt002",
+        "room_type_name": "ordinary",
+        "capacity": 4
+    }
+]
